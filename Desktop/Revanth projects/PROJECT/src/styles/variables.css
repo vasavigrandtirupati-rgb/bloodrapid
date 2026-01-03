@@ -1,0 +1,79 @@
+:root {
+  /* Brand Colors */
+  --color-primary: #FF0033;
+  /* Vibrant Red */
+  --color-primary-hover: #D6002A;
+  --color-secondary: #FFFFFF;
+  /* Pure White */
+  --color-accent: #FFD60A;
+  /* Bright Yellow */
+  --color-dark: #000000;
+  /* Pure Black */
+  --color-dark-gray: #121212;
+  /* Off Black for cards */
+  --color-medium-gray: #2A2A2A;
+
+  /* Functional Colors */
+  --color-success: #32D74B;
+  --color-warning: #FFD60A;
+  --color-error: #FF453A;
+
+  /* Text Colors */
+  --color-text-main: #000000;
+  --color-text-light: #FFFFFF;
+  --color-text-muted: #666666;
+  --color-text-on-primary: #FFFFFF;
+
+  /* Backgrounds */
+  --color-bg-body: #FAFAFA;
+  --color-bg-card: #FFFFFF;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 5rem;
+
+  /* Typography */
+  --font-family-sans: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  /* More modern font */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+  --font-size-4xl: 4.5rem;
+  /* Bigger hero text */
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows - Premium */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.12);
+  --shadow-glow-red: 0 0 20px rgba(255, 0, 51, 0.4);
+  --shadow-glow-yellow: 0 0 20px rgba(255, 214, 10, 0.4);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+[data-theme='dark'] {
+  --color-text-main: #FFFFFF;
+  --color-text-muted: #A1A1AA;
+  --color-bg-body: #000000;
+  --color-bg-card: #121212;
+  --color-secondary: #000000;
+  --color-primary: #FF1A47;
+}
