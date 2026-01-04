@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { ThreeScene } from '../components/ui/ThreeScene';
-import { Activity, Search, Shield, Users, ArrowRight } from 'lucide-react';
+import { Activity, Search, Shield, Users, ArrowRight, Droplet } from 'lucide-react';
+
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -33,94 +34,155 @@ export const Home = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 textAlign: 'center',
-                padding: '0 var(--spacing-md)',
-                marginTop: '-80px',
-                color: 'white'
+                padding: '4rem var(--spacing-md) 0',
+                background: 'radial-gradient(ellipse at center, #fff0f1 0%, #ffffff 70%)',
+                overflow: 'hidden'
             }}>
-                {/* Full Screen Background Image */}
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -2 }}>
-                    <img src="/assets/hero-banner.png" alt="Blood Flow Background" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    {/* Dark overlay for readability */}
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)' }} />
-                </div>
+                {/* Ambient Background Glow */}
+                <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '120vw',
+                    height: '120vh',
+                    background: 'radial-gradient(circle at center, rgba(255, 30, 60, 0.08) 0%, rgba(255, 255, 255, 0) 60%)',
+                    pointerEvents: 'none',
+                    zIndex: 0
+                }} />
 
-                {/* 3D Scene (Optional, can be removed if image is enough, or kept subtle) */}
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, opacity: 0.5 }}>
-                    <ThreeScene />
-                </div>
+                {/* Central Vibrant Glow for Text Contrast */}
+                <motion.div
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.6, 0.8, 0.6] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                        position: 'absolute',
+                        top: '45%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '600px',
+                        height: '400px',
+                        background: 'radial-gradient(closest-side, rgba(255, 0, 50, 0.35), rgba(255, 0, 50, 0))',
+                        filter: 'blur(60px)',
+                        zIndex: 0
+                    }}
+                />
 
-                <div style={{ zIndex: 1, maxWidth: '900px', position: 'relative' }}>
+                {/* Floating Blood Drops - Parallax/Depth Effect */}
+                <FloatingElements />
+
+                {/* Sparkles */}
+                <div style={{ position: 'absolute', top: '30%', left: '25%', opacity: 0.6 }}><Sparkle color="#ff4d6d" size={20} delay={0} /></div>
+                <div style={{ position: 'absolute', top: '60%', right: '20%', opacity: 0.4 }}><Sparkle color="#ff4d6d" size={15} delay={2} /></div>
+                <div style={{ position: 'absolute', top: '25%', right: '35%', opacity: 0.5 }}><Sparkle color="#ff99ac" size={24} delay={1} /></div>
+
+                <div style={{ zIndex: 10, maxWidth: '1000px', position: 'relative' }}>
+
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1 }}
-                        style={{
-                            position: 'absolute',
-                            top: '-50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            width: '800px',
-                            height: '800px',
-                            background: 'radial-gradient(circle, rgba(255,0,51,0.2) 0%, rgba(0,0,0,0) 70%)',
-                            zIndex: -1,
-                            pointerEvents: 'none'
-                        }}
-                    />
-
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        style={{
-                            fontSize: 'clamp(3rem, 7vw, 6rem)',
+                        transition={{ duration: 0.8 }}
+                    >
+                        {/* Headline */}
+                        <h1 style={{
+                            fontSize: 'clamp(3.5rem, 8vw, 6.5rem)',
                             fontWeight: 800,
-                            lineHeight: 1,
-                            marginBottom: 'var(--spacing-lg)',
-                            letterSpacing: '-0.03em',
-                            textShadow: '0 4px 20px rgba(0,0,0,0.5)'
-                        }}
-                    >
-                        Every Drop <br /><span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px rgba(255,0,51,0.6)' }}>Saves a Life</span>
-                    </motion.h1>
+                            lineHeight: 1.1,
+                            marginBottom: '1.5rem',
+                            letterSpacing: '-0.02em',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textShadow: '0 10px 30px rgba(255, 50, 50, 0.2)'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'white', textShadow: '0 2px 10px rgba(220, 0, 40, 0.5)' }}>
+                                <motion.div
+                                    animate={{ y: [0, -10, 0] }}
+                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                >
+                                    <Droplet size={58} fill="#ff1f40" stroke="none" style={{ filter: 'drop-shadow(0 4px 6px rgba(180,0,0,0.2))' }} />
+                                </motion.div>
+                                <span style={{ color: '#ffffff', textShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
+                                    Every Drop
+                                </span>
+                            </div>
+                            <span style={{
+                                color: '#ff1f40',
+                                background: 'linear-gradient(45deg, #ff1f40 0%, #ff4d6d 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                filter: 'drop-shadow(0 4px 15px rgba(255, 30, 60, 0.3))'
+                            }}>
+                                Saves a Life
+                            </span>
+                        </h1>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.6 }}
-                        style={{
+                        <p style={{
                             fontSize: '1.25rem',
-                            color: 'rgba(5, 5, 5, 0.9)',
-                            marginBottom: 'var(--spacing-2xl)',
-                            maxWidth: '650px',
-                            margin: '0 auto var(--spacing-2xl)',
+                            color: '#555',
+                            marginBottom: '3rem',
+                            maxWidth: '700px',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
                             lineHeight: 1.6,
-                            fontWeight: 500,
-                            textShadow: '0 2px 10px rgba(0,0,0,0.5)'
-                        }}
-                    >
-                        The most advanced real-time blood coordination network.
-                        Connect with donors instantly and manage critical supplies with ease.
-                    </motion.p>
+                            fontWeight: 500
+                        }}>
+                            A real-time blood coordination network <strong style={{ color: '#333' }}>connecting</strong> donors, seekers, and blood banks — when every second matters.
+                        </p>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 }}
-                        style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}
-                    >
-                        <Link to="/login">
-                            <Button style={{ padding: '1.2rem 3rem', fontSize: '1.2rem', boxShadow: 'var(--shadow-glow-red)' }}>
-                                Get Started <ArrowRight size={20} />
-                            </Button>
-                        </Link>
-                        <Link to="/blood-banks">
-                            <Button variant="outline" style={{ padding: '1.2rem 3rem', fontSize: '1.2rem', background: 'white' }}>
-                                Find Nearby
-                            </Button>
-                        </Link>
+                        {/* Buttons */}
+                        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '3rem' }}>
+                            <Link to="/login">
+                                <motion.button
+                                    whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(255, 31, 64, 0.4)' }}
+                                    whileTap={{ scale: 0.95 }}
+                                    style={{
+                                        padding: '1.2rem 3rem',
+                                        fontSize: '1.1rem',
+                                        fontWeight: 700,
+                                        borderRadius: '50px',
+                                        border: 'none',
+                                        background: 'linear-gradient(135deg, #ff1f40 0%, #ff4d6d 100%)',
+                                        color: 'white',
+                                        cursor: 'pointer',
+                                        boxShadow: '0 6px 20px rgba(255, 31, 64, 0.25)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.5rem'
+                                    }}
+                                >
+                                    Become a Lifesaver <ArrowRight size={20} />
+                                </motion.button>
+                            </Link>
+
+                            <Link to="/blood-banks">
+                                <motion.button
+                                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 31, 64, 0.05)' }}
+                                    whileTap={{ scale: 0.95 }}
+                                    style={{
+                                        padding: '1.2rem 3rem',
+                                        fontSize: '1.1rem',
+                                        fontWeight: 700,
+                                        borderRadius: '50px',
+                                        border: '2px solid #ff1f40',
+                                        background: 'transparent',
+                                        color: '#ff1f40',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }}
+                                >
+                                    Find Blood Near You
+                                </motion.button>
+                            </Link>
+                        </div>
                     </motion.div>
                 </div>
             </section>
+
+            {/* Separator Gradient */}
+            <div style={{ height: '100px', background: 'linear-gradient(to bottom, #ffffff 0%, #f9fafb 100%)' }} />
 
             {/* Features / How it works */}
             <section style={{ padding: 'var(--spacing-2xl) 0', position: 'relative' }}>
@@ -269,5 +331,74 @@ const StatCard = ({ number, label, description, highlightColor }) => (
         </div>
         <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--color-dark)' }}>{label}</h3>
         <p style={{ color: 'var(--color-text-muted)', lineHeight: '1.6', fontSize: '1rem' }}>{description}</p>
+    </motion.div>
+);
+
+const FloatingElements = () => {
+    // Generate random positions for drops
+    const drops = Array.from({ length: 15 }).map((_, i) => ({
+        id: i,
+        size: Math.random() * 40 + 10,
+        x: Math.random() * 100, // %
+        y: Math.random() * 100, // %
+        duration: Math.random() * 10 + 10,
+        delay: Math.random() * 5,
+        blur: Math.random() * 4
+    }));
+
+    return (
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
+            {drops.map(drop => (
+                <motion.div
+                    key={drop.id}
+                    initial={{ y: 0, opacity: 0 }}
+                    animate={{
+                        y: [-20, 20, -20],
+                        opacity: [0.1, 0.4, 0.1],
+                        scale: [1, 1.1, 1]
+                    }}
+                    transition={{
+                        duration: drop.duration,
+                        repeat: Infinity,
+                        delay: drop.delay,
+                        ease: "easeInOut"
+                    }}
+                    style={{
+                        position: 'absolute',
+                        left: `${drop.x}%`,
+                        top: `${drop.y}%`,
+                        filter: `blur(${drop.blur}px)`
+                    }}
+                >
+                    <Droplet
+                        size={drop.size}
+                        fill="rgba(255, 50, 80, 0.6)" // Soft red fill
+                        stroke="none"
+                        style={{ transform: 'rotate(15deg)' }}
+                    />
+                </motion.div>
+            ))}
+        </div>
+    );
+};
+
+const Sparkle = ({ color, size, delay }) => (
+    <motion.div
+        animate={{
+            scale: [0, 1, 0],
+            rotate: [0, 180],
+            opacity: [0, 1, 0]
+        }}
+        transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatDelay: Math.random() * 3 + 1,
+            delay: delay
+        }}
+        style={{ width: size, height: size, color: color, position: 'relative' }}
+    >
+        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '100%', height: '100%' }}>
+            <path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10L12 0Z" />
+        </svg>
     </motion.div>
 );

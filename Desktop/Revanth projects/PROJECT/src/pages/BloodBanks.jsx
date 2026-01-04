@@ -108,6 +108,7 @@ export const BloodBanks = () => {
 
       {/* Results */}
       <motion.div
+        key={`${selectedLocation}-${selectedGroup}`}
         variants={container}
         initial="hidden"
         animate="show"

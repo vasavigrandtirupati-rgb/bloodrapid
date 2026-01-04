@@ -6,7 +6,7 @@ const KEYS = {
     SEEKERS: 'rapidblood_seekers',
     ALERTS: 'rapidblood_alerts',
     USERS: 'rapidblood_users', // For auth simulation
-    INIT: 'rapidblood_init'
+    INIT: 'rapidblood_init_v2'
 };
 
 export const storageService = {

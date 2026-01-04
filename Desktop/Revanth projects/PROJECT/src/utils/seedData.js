@@ -31,18 +31,37 @@ function getRandomInt(min, max) {
 }
 
 export const seedData = {
-  bloodBanks: Array.from({ length: 20 }, (_, i) => ({
-    id: `bank-${i + 1}`,
-    name: `${getRandomItem(BANK_NAMES)} ${getRandomItem(LOCATIONS)}`,
-    location: getRandomItem(LOCATIONS),
-    contact: `98765432${String(i).padStart(2, '0')}`,
-    email: `bank${i + 1}@rapidblood.com`,
-    password: 'password123', // For mock auth
-    inventory: BLOOD_GROUPS.reduce((acc, bg) => {
-      acc[bg] = getRandomInt(0, 50);
-      return acc;
-    }, {})
-  })),
+  bloodBanks: [
+    // Ensure every location has at least one blood bank
+    ...LOCATIONS.map((loc, i) => ({
+      id: `bank-static-${i}`,
+      name: `${getRandomItem(BANK_NAMES)} ${loc}`,
+      location: loc, // Guaranteed match
+      contact: `98765432${String(i).padStart(2, '0')}`,
+      email: `bank${i}@rapidblood.com`,
+      password: 'password123',
+      inventory: BLOOD_GROUPS.reduce((acc, bg) => {
+        acc[bg] = getRandomInt(0, 50);
+        return acc;
+      }, {})
+    })),
+    // Add more random blood banks
+    ...Array.from({ length: 40 }, (_, i) => {
+      const loc = getRandomItem(LOCATIONS);
+      return {
+        id: `bank-random-${i + 1}`,
+        name: `${getRandomItem(BANK_NAMES)} ${loc}`,
+        location: loc,
+        contact: `98765432${String(i + 10).slice(-2)}`,
+        email: `bank${i + 20}@rapidblood.com`,
+        password: 'password123',
+        inventory: BLOOD_GROUPS.reduce((acc, bg) => {
+          acc[bg] = getRandomInt(0, 50);
+          return acc;
+        }, {})
+      };
+    })
+  ],
 
   donors: Array.from({ length: 20 }, (_, i) => ({
     id: `donor-${i + 1}`,
@@ -70,7 +89,7 @@ export const seedData = {
     email: `seeker${i + 1}@rapidblood.com`,
     password: 'password123'
   })),
-  
+
   alerts: [
     { id: 1, message: "Urgent need for O- blood in Vijayawada", type: "urgent", date: new Date().toISOString() },
     { id: 2, message: "Blood donation camp in Tirupati next Sunday", type: "info", date: new Date().toISOString() },
